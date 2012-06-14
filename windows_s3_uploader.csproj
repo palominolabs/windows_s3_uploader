@@ -70,6 +70,9 @@
       <HintPath>C:\Program Files (x86)\AWS SDK for .NET\bin\AWSSDK.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CommandLine">
+      <HintPath>packages\CommandLine.1.9.7\lib\CommandLine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -111,5 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
