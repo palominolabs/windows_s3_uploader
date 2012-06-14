@@ -38,6 +38,9 @@ namespace windows_s3_uploader
     [Option(null, "public", HelpText = "Set public read acl")]
     public bool IsPublic { get; set; }
 
+    [Option(null, "progress", HelpText = "Display upload progress")]
+    public bool ShouldShowProgress { get; set; }
+
     [HelpOption(null, "help", HelpText = "Display this screen")]
     public string GetUsage()
     {
@@ -76,11 +79,21 @@ namespace windows_s3_uploader
 
         if (options.IsPublic)
         {
-          transferRequest = transferRequest.WithCannedACL(S3CannedACL.PublicRead);
+          transferRequest.WithCannedACL(S3CannedACL.PublicRead);
+        }
+
+        if (options.ShouldShowProgress)
+        {
+          Console.WriteLine();
+          transferRequest.WithSubscriber(new EventHandler<UploadProgressArgs>((obj, progress) =>
+          {
+            Console.Write("\r{0}% complete. Uploaded {1} / {2} bytes.                    ", progress.PercentDone, progress.TransferredBytes, progress.TotalBytes);
+          }));
         }
 
         transferUtility.Upload(transferRequest);
 
+        Console.WriteLine();
         Console.WriteLine("Done!");
       }
       catch (Exception e)
