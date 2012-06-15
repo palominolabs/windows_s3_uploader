@@ -1,0 +1,9 @@
+Simple utility for uploading files to S3 from the Windows command line. To use an access key and secret key from the command line do something like this:
+
+windows_s3_uploader.exe --bucket="one of your buckets" --file="File to upload" --key="Key in S3" --accessKey=bar --secretKey=foo
+
+To have the unix timestamp subsituted into the name you can do something like this:
+
+windows\_s3\_uploader.exe --bucket="one of your buckets" --file="File to upload" --key="backup\_at\_\_\_unix\_timestamp\_\_" --accessKey=bar --secretKey=foo
+
+To use an IAM role assigned to the EC2 instance instead of command line credentials omit --accessKey and --secretKey.
