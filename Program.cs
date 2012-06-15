@@ -26,7 +26,7 @@ namespace windows_s3_uploader
     [Option(null, "file", Required = true, HelpText = "The file to upload")]
     public string File { get; set; }
 
-    [Option(null, "key", Required = true, HelpText = "The key of the object to create in S3. %unix_timestamp% will be replaced with the unix timestamp")]
+    [Option(null, "key", Required = true, HelpText = "The key of the object to create in S3. __unix_timestamp__ will be replaced with the unix timestamp")]
     public string Key { get; set; }
 
     [Option(null, "accessKey", HelpText = "AWS Access Key")]
@@ -75,7 +75,7 @@ namespace windows_s3_uploader
         var transferRequest = new TransferUtilityUploadRequest()
           .WithBucketName(options.Bucket)
           .WithFilePath(options.File)
-          .WithKey(options.Key.Replace("%unix_timestamp%", timestamp.ToString()));
+          .WithKey(options.Key.Replace("__unix_timestamp__", timestamp.ToString()));
 
 
         if (options.IsPublic)
