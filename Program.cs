@@ -68,6 +68,9 @@ namespace windows_s3_uploader
 
       var timestamp = Math.Round((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds);
 
+      var key = options.Key.Replace("__unix_timestamp__", timestamp.ToString());
+      Console.WriteLine("Using key <{0}>", key);
+
       try
       {
         var s3Client = new AmazonS3Client(options.AccessKey, options.SecretKey);
@@ -75,7 +78,7 @@ namespace windows_s3_uploader
         var transferRequest = new TransferUtilityUploadRequest()
           .WithBucketName(options.Bucket)
           .WithFilePath(options.File)
-          .WithKey(options.Key.Replace("__unix_timestamp__", timestamp.ToString()));
+          .WithKey(key);
 
 
         if (options.IsPublic)
