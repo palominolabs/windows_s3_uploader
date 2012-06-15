@@ -29,10 +29,10 @@ namespace windows_s3_uploader
     [Option(null, "key", Required = true, HelpText = "The key of the object to create in S3. %unix_timestamp% will be replaced with the unix timestamp")]
     public string Key { get; set; }
 
-    [Option(null, "accessKey", Required = true, HelpText = "AWS Access Key")]
+    [Option(null, "accessKey", HelpText = "AWS Access Key")]
     public string AccessKey { get; set; }
 
-    [Option(null, "secretKey", Required = true, HelpText = "AWS Secret Key")]
+    [Option(null, "secretKey", HelpText = "AWS Secret Key")]
     public string SecretKey { get; set; }
 
     [Option(null, "public", HelpText = "Set public read acl")]
@@ -48,6 +48,7 @@ namespace windows_s3_uploader
       help.Copyright = new CopyrightInfo("Palomino Labs, Inc.", 2012);
       help.AddPreOptionsLine("Command options:");
       help.AddOptions(this);
+      help.AddPostOptionsLine("Omit accessKey and secretKey to get credentials from IAM");
       return help;
     }
   }
